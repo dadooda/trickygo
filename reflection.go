@@ -5,5 +5,6 @@ package trickygo
 // values, if any.
 //
 // In the example below, `openPerson` has all fields exported and JSON decoder updates them. Another struct,
-// `secretPerson`, has `age` unexported and this field is silently skipped by JSON decoder.
+// `secretPerson`, has `age` unexported and this field is silently skipped by JSON decoder, although JSON data
+// contains a valid `age` field.
 func JsonDecoderSkipsUnexportedFields() {}
