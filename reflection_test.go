@@ -7,12 +7,7 @@ import (
 	"strings"
 )
 
-// JSON decoder can't overwrite unexported fields and thus silently skips them, retaining previously set
-// values, if any.
-//
-// In the example below, `openPerson` has all fields exported and JSON decoder updates them. Another struct
-// `secretPerson`, has `age` unexported and this field is silently skipped by JSON encoder.
-func JsonSkipsUnexportedFields() {
+func ExampleJsonDecoderSkipsUnexportedFields() {
 	type openPerson struct {
 		Name string
 		Age int
@@ -34,4 +29,10 @@ func JsonSkipsUnexportedFields() {
 	err = json.NewDecoder(strings.NewReader(`{"name": "Bob", "age": 35}`)).Decode(&sprs)
 	if err != nil { panic(err) }
 	fmt.Printf("secretPerson after:%v\n", sprs)
+
+	// Output:
+	// openPerson before:{Alice 10}
+	// openPerson after:{Bob 35}
+	// secretPerson before:{Alice 10}
+	// secretPerson after:{Bob 10}
 }

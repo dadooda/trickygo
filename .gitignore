@@ -1,3 +1,9 @@
 
 # Editor/IDE.
 /*.code-workspace
+
+# Bak/old/orig etc.
+/*.patch
+*.old*
+*.orig
+*.ref*
