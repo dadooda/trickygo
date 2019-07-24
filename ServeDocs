@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+echo "Starting documentation server"
+echo "In your browser, open \`host:6060/pkg/dadooda/trickygo\`"
+set -x
+godoc -http=:6060

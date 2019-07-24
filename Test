@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+TOPICS=(
+  reflect/
+)
+
+set -x
+go test ${TOPICS[@]}
