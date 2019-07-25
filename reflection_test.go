@@ -42,22 +42,33 @@ func ExampleReflectionCheatsheet() {
 	type person struct {
 		Name string
 		age int
+		IsMale bool
 	}
 
-	//
-	// Basic type/value retrieval.
-	//
+	fmt.Println("# Basic type/value retrieval")
 
-	prs := person{"Alice", 10}
+	prs := person{"Alice", 10, false}
 	elem := reflect.ValueOf(&prs).Elem()
 	ty := elem.Type()
 	for i := 0; i < elem.NumField(); i++ {
 		field := elem.Field(i)
 		fieldT := ty.Field(i)
-		fmt.Printf("field %d: name:%#v CanSet:%#v\n", i, fieldT.Name, field.CanSet())
+		fmt.Printf("field %d: name:%#v Type().Name():%#v CanSet:%#v String():%#v\n", i, fieldT.Name, field.Type().Name(), field.CanSet(), field.String())
 	}
 
+	fmt.Println("# Type-specific value retrieval")
+
+	// NOTE: Lookup is case-sensitive!
+	fName := elem.FieldByName("Name")
+	fAge := elem.FieldByName("age")
+	fIsMale := elem.FieldByName("IsMale")
+	fmt.Printf("fName.String():%#v fAge.Int():%#v fIsMale.Bool():%#v", fName.String(), fAge.Int(), fIsMale.Bool())
+
 	// Output:
-	// field 0: name:"Name" CanSet:true
-	// field 1: name:"age" CanSet:false
+	// # Basic type/value retrieval
+	// field 0: name:"Name" Type().Name():"string" CanSet:true String():"Alice"
+	// field 1: name:"age" Type().Name():"int" CanSet:false String():"<int Value>"
+	// field 2: name:"IsMale" Type().Name():"bool" CanSet:true String():"<bool Value>"
+	// # Type-specific value retrieval
+	// fName.String():"Alice" fAge.Int():10 fIsMale.Bool():false
 }
