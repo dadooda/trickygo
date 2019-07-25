@@ -2,6 +2,11 @@
 Tricky Go
 =========
 
+<p>
+  <!-- Badges -->
+  <a href="https://godoc.org/github.com/dadooda/trickygo"><img src="https://godoc.org/github.com/dadooda/trickygo?status.svg" alt="GoDoc"></a>
+</p>
+
 A collection of runnable pieces of Go code which demonstrate tricky aspects of the language.
 
 The approach is basically similar to the famous [Go by Example](https://gobyexample.com/), with the following
