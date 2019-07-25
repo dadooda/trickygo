@@ -4,6 +4,7 @@ package trickygo
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"strings"
 )
 
@@ -35,4 +36,28 @@ func ExampleJsonDecoderSkipsUnexportedFields() {
 	// openPerson after:{Bob 35}
 	// secretPerson before:{Alice 10}
 	// secretPerson after:{Bob 10}
+}
+
+func ExampleReflectionCheatsheet() {
+	type person struct {
+		Name string
+		age int
+	}
+
+	//
+	// Basic type/value retrieval.
+	//
+
+	prs := person{"Alice", 10}
+	elem := reflect.ValueOf(&prs).Elem()
+	ty := elem.Type()
+	for i := 0; i < elem.NumField(); i++ {
+		field := elem.Field(i)
+		fieldT := ty.Field(i)
+		fmt.Printf("field %d: name:%#v CanSet:%#v\n", i, fieldT.Name, field.CanSet())
+	}
+
+	// Output:
+	// field 0: name:"Name" CanSet:true
+	// field 1: name:"age" CanSet:false
 }

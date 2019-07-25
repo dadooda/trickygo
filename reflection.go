@@ -8,3 +8,8 @@ package trickygo
 // `secretPerson`, has `age` unexported and this field is silently skipped by JSON decoder, although JSON data
 // contains a valid `age` field.
 func JsonDecoderSkipsUnexportedFields() {}
+
+// Go reflection types and methods are often confusing.
+//
+// In the example below, some common cases are covered in form of a quick cheatsheet.
+func ReflectionCheatsheet() {}
