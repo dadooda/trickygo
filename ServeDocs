@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 
+set -e -u -o pipefail
+
+SP=${0%/*}
+
+# Print URL subpath.
+url_subpath() {
+  local RSP=`realpath $SP`
+  # Get GOPATH from Go, as it has a default even if not set in env.
+  # See https://rakyll.org/default-gopath/.
+  local GOPATH=`go env GOPATH`
+  echo "${RSP#$GOPATH/}"
+
+}
+
 echo "Starting documentation server"
-echo "In your browser, open \`host:6060/pkg/dadooda/trickygo\`"
+echo "In your browser, open \`host:6060/pkg/`url_subpath`\`"
 set -x
 godoc -http=:6060
